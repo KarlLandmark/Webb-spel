@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Document</title>
+   </head>
+   <body>
+      <script src="http://koda.nu/simple.js">
+          
+         var zombies = [];
+         var  i = 0;
+         while (i < 5) {
+             zombies.push({x:random(totalWidth), y:random(totalHeight), speed:random(1,5) });
+             i += 1;
+        //movement
+        let p1x = 10;
+        let p1y = 10;        
+        var p1 = {x: 100, y: 360, speed: 10}
+       //for bullets
+        let bullets1 = [];
+        let bullets2 = [];
+        let activeBullet = false;
+         }
+         
+         function update () {
+             clearScreen();
+            
+             var i = 0;
+            
+             while (i < 25) {
+                 var zombie = zombies[i]
+                 
+                 picture(zombie.x, zombie.y, "http://spelprogrammering.nu/bilder/zombie.png");
+         
+                 if (zombie.x < p1.x) {w
+                     zombie.x += zombie.speed;
+                    }
+                 else { zombie.x -= zombie.speed;}
+         
+                 if (zombie.y < p1.x)
+                     zombie.y += zombie.speed;
+                     
+                 else { zombie.y -= zombie.speed;}
+         
+                 if (distance(mouse, zombie) < 5) {
+                     alert('GAME OVA')
+                 }
+                 i += 1;
+             }
+             picture(p1.x, p1.y, "Bilder/Player1.png")
+            if (keyboard.w){p1.y -= 10}
+            if (keyboard.a){p1.x -= 10}
+            if (keyboard.d){p1.x -= -10}
+            if (keyboard.s){p1.y -= -10}
+            //For the bullets
+           
+            let bulletx = 0;
+            let bullety = 0;    
+
+           
+        // bullet
+            if (keyboard.space){
+                activeBullet = true; 
+                bulletx = p1.x +400;
+                bullety = p1.y +390;
+
+                
+                bullets1.push([bulletx, bullety]);
+           
+            }
+
+            if(activeBullet == true){
+                
+                for(let i = 0; i < bullets1.length; i++){
+                    bullets1[i][0]+= 10;
+                    bullets1[i][1]+=0;
+
+                    
+
+                    
+                    circle(bullets1[i][0] , bullets1[i][1] , 5, "red");
+ 
+                    
+                }
+         }
+        }
+         
+      </script>
+   </body>
+</html>
