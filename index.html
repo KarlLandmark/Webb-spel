@@ -16,9 +16,10 @@
         var zombies = [];
         var  i = 0;
          while (i < 5) {
-             zombies.push({x:random(totalWidth), y:random(totalHeight), speed:random(1,5) });
+             zombies.push({x:2000, y:random(totalHeight)+100, speed:random(1,5),hp: 5});
+             
              i += 1;
-       
+         }
      
 
     
@@ -26,58 +27,26 @@
         let p1x = 10;
         let p1y = 10;        
         var p1 = {x: 100, y: 360, speed: 10}
+   
+        //skotten
         let bullets1 = [];
         let activeBullet = false;
+       
         function update(){
             clearScreen();
 
          //zombies
          var i = 0;
-            
-            while (i < 25) {
-                var zombie = zombies[i]
-                
-                picture(zombie.x, zombie.y, "http://spelprogrammering.nu/bilder/zombie.png");
+
+         //points
+         var points;
+          //Skotten
         
-                if (zombie.x < mouse.x) {w
-                    zombie.x += zombie.speed;
-                   }
-                else { zombie.x -= zombie.speed;}
-        
-                if (zombie.y < mouse.x)
-                    zombie.y += zombie.speed;
-                    
-                else { zombie.y -= zombie.speed;}
-        
-                if (distance(mouse, zombie) < 5) {
-                    alert('GAME OVA')
-                }
-                i += 1;
-
-            }
-            
-
-
-
-            picture(p1.x, p1.y, "Bilder/Player1.png")
-            if (keyboard.w){p1.y -= 10}
-            if (keyboard.a){p1.x -= 10}
-            if (keyboard.d){p1.x -= -10}
-            if (keyboard.s){p1.y -= -10}
-            if (p1y < totalHeight)
-            {
-                p1.ySpeed = -p1.ySpeed;
-            }
-
-  
-
-             //For the bullets
-           
-            let bulletx = 0;
+          let bulletx = 0;
             let bullety = 0;    
 
            
-        // bullet
+                 // Skott
             if (keyboard.space){
                 activeBullet = true; 
                 bulletx = p1.x +360 ;
@@ -97,13 +66,66 @@
                     
 
                     
-                    circle(bullets1[i][0] , bullets1[i][1] , 5, "red");
+                    circle(bullets1[i][0] , bullets1[i][1] , 5, "balck");
  
                     
                 }
             }
-        }
-    }
+            
+            while (i < 5) {
+              
+                
+                picture(zombies[i].x, zombies[i].y, "Bilder/zombietest.png");
+        
+                if (zombies[i].x < 0) {
+                    zombies[i].x += zombies[i].speed;
+                   }
+                else { zombies[i].x -= zombies[i].speed;}   
+        
+               
+                   if(zombies[i].x == 0){
+                       alert("Pasta sallad");
+                       stopUpdate();  
+                   }
+                   //Ta skada
+
+                   for(let z = 0; z < bullets1.length; z++){
+                       if(distance(zombies[i].x, zombies[i].y, bullets1[z][0], bullets1[z][1]) <100){
+                           zombies.hp-= 5;
+                           text(50,50,50,"fuckin noob", "black")
+                            
+                           points++
+                       }
+                   }
+
+                
+                i += 1;
+
+            }
+            
+
+
+            text(300,50,50,points, "black")
+            
+            picture(p1.x, p1.y, "Bilder/Player1.png")
+            if (keyboard.w){p1.y -= 10}
+            if (keyboard.a){p1.x -= 10}
+            if (keyboard.d){p1.x -= -10}
+            if (keyboard.s){p1.y -= -10}
+            if (p1y < totalHeight)
+            {
+                p1.ySpeed = -p1.ySpeed;
+            }
+
+  
+
+            
+            
+                
+            }
+        
+
+    
     </script>
     
 </body>
